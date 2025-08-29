@@ -1,0 +1,11 @@
+body{
+    background-color: #133E87;
+
+}
+
+.ans{
+    font-size: 100px;
+    outline: none;
+    background-color: #F3F3E0;
+    text-transform: uppercase;
+}
