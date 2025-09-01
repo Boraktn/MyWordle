@@ -1,11 +1,45 @@
 body{
     background-color: #133E87;
-
+    font-family:'Times New Roman', Times, serif;
+    height: 100%;
+    width: 100%;
 }
-
+h{
+    position: relative;
+    left: 15%;
+    text-align: center;
+    font-size: 90px; 
+    color:azure;
+}
+#myDiv{
+    height: 100%;
+    width: 70%;
+    position: relative;
+    left: 20%;
+    
+}
 .ans{
-    font-size: 100px;
-    outline: none;
+    font-size: 70px;
+    border: none;
     background-color: #F3F3E0;
     text-transform: uppercase;
-}
+    margin: 10px;
+    display: inline-block; 
+    zoom: 1; 
+    vertical-align: top;
+    width: 15%;
+    caret-color: transparent;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    outline: none;
+    
+}  
+.btn{
+    position: relative;
+    left:48%;
+    background-color: darkred;
+    color: azure;
+    margin-top: 80px;
+    height: 50px;
+    width: 90px;
+} 
