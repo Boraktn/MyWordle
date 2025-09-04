@@ -22,8 +22,10 @@ function refresh(){
   const userInput = Array.from(inputList[row]).map(inp => inp.value.toUpperCase());
       const children = myDiv.children;
   for(let i=0; i<5; i++){
-    inputList[row][i].value = "";
-    children[i].style.backgroundColor  = "#F3F3E0"
+    for(let r=0; r<6; r++){
+    inputList[r][i].value = "";
+    children[r].children[i].style.backgroundColor  = "#F3F3E0"
+    }
   }
   focusFirstEmpty();
 }
@@ -32,23 +34,24 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-inputList[row].forEach((input, index) => {
+inputList.forEach((rowList, rowIndex) => {
+  rowList.forEach((input, index) => {
+
   input.addEventListener("input", () => {
-    if (input.value.length === 1 && index < inputList[row].length - 1) {
-      inputList[row][index + 1].focus();
-    console.log("b");  
+    if (input.value.length === 1 && index < rowList.length - 1) {
+      rowList[index + 1].focus();
     }
   });
 
   input.addEventListener("keydown", (event) => {
     if (event.key === "Backspace" && input.value === "") {
       if (index > 0) {
-        inputList[row][index - 1].focus();
-        inputList[row][index - 1].value = "";
+        rowList[index - 1].focus();
+        rowList[index - 1].value = "";
       }
     }
-    if (event.key === "Enter" && inputList[row][4].value !== "") {
-    const userInput = Array.from(inputList[row]).map(inp => inp.value.toUpperCase());
+    if (event.key === "Enter" && rowList[4].value !== "") {
+    const userInput = Array.from(rowList).map(inp => inp.value.toUpperCase());
       const children = myDiv.children[row].children;
     for(let step=0; step <5; step++){
         if(userInput[step]==answer[step]){
@@ -59,7 +62,7 @@ inputList[row].forEach((input, index) => {
 
         }
         }
-        row = row  + 1;
+        row =  row + 1;
         focusFirstEmpty();
     }
   });
@@ -67,4 +70,6 @@ inputList[row].forEach((input, index) => {
     setTimeout(focusFirstEmpty, 0);
   });
 });
+  });
+
   
