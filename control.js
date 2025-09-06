@@ -1,5 +1,5 @@
 const myDiv= document.getElementById("myDiv");
-const answer= ["C","E","V","A","P"];
+const answer= ["D","E","N","İ","Z"];
 const inputs = document.querySelectorAll("#div1 .ans");
 const inputs2 = document.querySelectorAll("#div2 .ans");
 const inputs3 = document.querySelectorAll("#div3 .ans");
@@ -21,10 +21,10 @@ function focusFirstEmpty() {
 function refresh(){
   const userInput = Array.from(inputList[row]).map(inp => inp.value.toUpperCase());
       const children = myDiv.children;
-  for(let i=0; i<5; i++){
-    for(let r=0; r<6; r++){
-    inputList[r][i].value = "";
-    children[r].children[i].style.backgroundColor  = "#F3F3E0"
+  for(let i=0; i<6; i++){
+    for(let r=0; r<5; r++){
+    inputList[i][r].value = "";
+    children[i].children[r].style.backgroundColor  = "#F3F3E0"
     }
   }
   focusFirstEmpty();
@@ -56,6 +56,9 @@ inputList.forEach((rowList, rowIndex) => {
     for(let step=0; step <5; step++){
         if(userInput[step]==answer[step]){
             children[step].style.backgroundColor = "green";
+            }
+        else if(answer.includes(userInput[step])){
+            children[step].style.backgroundColor = "yellow";
             }
         else{
             children[step].style.backgroundColor = "red";
