@@ -11,6 +11,35 @@ h{
     font-size: 90px; 
     color:azure;
 }
+#popup{
+    position: absolute;
+    top:15%;
+    left:40%;
+    height: 200px;
+    width:300px;
+    background-color: darkkhaki;
+    z-index: 2;
+    visibility: hidden;
+}
+#popupanswer{
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left:45px;
+    margin-bottom: 60px;
+}
+#popupbuttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+}
+.popupbutton{
+    height: 20px;
+    width:100px;
+    background-color: bisque;
+    text-align: center;
+    outline: 3px solid #292929;
+}
 #myDiv{
     height: 100%;
     width: 70%;
@@ -21,7 +50,7 @@ h{
 .ans{
     font-size: 50px;
     border: none;
-    background-color: #F3F3E0;
+    background-color: #292929;
     text-transform: uppercase;
     margin: 7px;
     display: inline-block; 
@@ -31,9 +60,18 @@ h{
     caret-color: transparent;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+    color:aliceblue;
     outline: none;
     
 }  
+.ans input{
+transition: transform 0.2s ease;
+}
+
+.ans input.animate {
+  transform: scale(1.1);
+}
+
 .btn{
     position: relative;
     left:48%;

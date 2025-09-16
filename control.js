@@ -1,5 +1,21 @@
+let words= ""
+let answer= []
+fetch("filteredwords.txt")
+  .then(res => res.text())
+  .then(text => {
+      words = text.split("\n")
+      .map(w => w.trim())
+      .filter(w => w.length > 0);
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      answer = randomWord.split("");
+  })
+    .catch(err => console.error(err));
+
+
+
 const myDiv= document.getElementById("myDiv");
-const answer= ["D","E","N","İ","Z"];
+const popUp= document.getElementById("popup");
+const popUpAnswer=document.getElementById("popupanswer");
 const inputs = document.querySelectorAll("#div1 .ans");
 const inputs2 = document.querySelectorAll("#div2 .ans");
 const inputs3 = document.querySelectorAll("#div3 .ans");
@@ -9,7 +25,15 @@ const inputs6 = document.querySelectorAll("#div6 .ans");
 const inputList = [inputs, inputs2, inputs3, inputs4, inputs5, inputs6];
 let row = 0;
 
+document.querySelectorAll(".ans input").forEach(input => {
+  input.addEventListener("input", () => {
+    input.classList.add("animate");
 
+    setTimeout(() => {
+      input.classList.remove("animate");
+    }, 200); // CSS süresi ile aynı
+  });
+});
 function focusFirstEmpty() {
   for (let i = 0; i < inputList[row].length; i++) {
     if (inputList[row][i].value === "") {
@@ -24,9 +48,11 @@ function refresh(){
   for(let i=0; i<6; i++){
     for(let r=0; r<5; r++){
     inputList[i][r].value = "";
-    children[i].children[r].style.backgroundColor  = "#F3F3E0"
+    children[i].children[r].style.backgroundColor  = "#292929"
     }
+  
   }
+  row=0;
   focusFirstEmpty();
 }
 window.addEventListener("DOMContentLoaded", () => {
@@ -58,15 +84,21 @@ inputList.forEach((rowList, rowIndex) => {
             children[step].style.backgroundColor = "green";
             }
         else if(answer.includes(userInput[step])){
-            children[step].style.backgroundColor = "yellow";
+            children[step].style.backgroundColor = "#898901";
             }
         else{
-            children[step].style.backgroundColor = "red";
+            children[step].style.backgroundColor = "#64645e";
 
         }
         }
+        if(row!=5){
         row =  row + 1;
         focusFirstEmpty();
+        }
+        else if(row==5){
+          popUpAnswer.textContent = answer.join("");
+          popUp.style.visibility = "visible";
+        }
     }
   });
   input.addEventListener("blur", () => {
