@@ -1,5 +1,6 @@
 let words= ""
 let answer= []
+let result= []
 fetch("filteredwords.txt")
   .then(res => res.text())
   .then(text => {
@@ -8,6 +9,8 @@ fetch("filteredwords.txt")
       .filter(w => w.length > 0);
       const randomWord = words[Math.floor(Math.random() * words.length)];
       answer = randomWord.split("");
+        console.log(answer);
+
   })
     .catch(err => console.error(err));
 
@@ -31,7 +34,7 @@ document.querySelectorAll(".ans input").forEach(input => {
 
     setTimeout(() => {
       input.classList.remove("animate");
-    }, 200); // CSS süresi ile aynı
+    }, 200);
   });
 });
 function focusFirstEmpty() {
@@ -43,17 +46,22 @@ function focusFirstEmpty() {
   }
 }
 function refresh(){
-  const userInput = Array.from(inputList[row]).map(inp => inp.value.toUpperCase());
+  popUp.style.visibility= "hidden"
+  /*const userInput = Array.from(inputList[row]).map(inp => inp.value.toUpperCase());*/
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      answer = randomWord.split("");
       const children = myDiv.children;
   for(let i=0; i<6; i++){
     for(let r=0; r<5; r++){
     inputList[i][r].value = "";
     children[i].children[r].style.backgroundColor  = "#292929"
+    result = [];
     }
   
   }
   row=0;
   focusFirstEmpty();
+  console.log(answer);
 }
 window.addEventListener("DOMContentLoaded", () => {
   focusFirstEmpty();
@@ -79,25 +87,29 @@ inputList.forEach((rowList, rowIndex) => {
     if (event.key === "Enter" && rowList[4].value !== "") {
     const userInput = Array.from(rowList).map(inp => inp.value.toUpperCase());
       const children = myDiv.children[row].children;
+      result.push([]);
     for(let step=0; step <5; step++){
         if(userInput[step]==answer[step]){
-            children[step].style.backgroundColor = "green";
+            children[step].style.backgroundColor = "#018913ff";
+            result[row].push("🟩");
             }
         else if(answer.includes(userInput[step])){
             children[step].style.backgroundColor = "#898901";
+            result[row].push("🟨");            
             }
         else{
             children[step].style.backgroundColor = "#64645e";
-
+            result[row].push("⬜");
         }
         }
         if(row!=5){
         row =  row + 1;
         focusFirstEmpty();
         }
-        else if(row==5){
+        if(row==5 || result[row - 1].every((val, i) => val === "🟩")){
           popUpAnswer.textContent = answer.join("");
           popUp.style.visibility = "visible";
+          console.log(result);
         }
     }
   });
@@ -106,5 +118,16 @@ inputList.forEach((rowList, rowIndex) => {
   });
 });
   });
+
+function copyItemsAndLink() {
+    const pageLink = window.location.href;
+    const items = result.map(row => row.join("")).join("\n")
+      const textToCopy = items + "\n" + pageLink;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+    alert("Kopyalandı:\n" + textToCopy);
+  }).catch(err => {
+    console.error("Kopyalama başarısız:", err);
+  });
+}
 
   

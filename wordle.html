@@ -4,12 +4,12 @@
     <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-    <h>WORDLE ON THE HOUSE</h>
+    <h1>WORDLE ON THE HOUSE</h1>
     <div id="popup">
         <div id="popupanswer">DOĞRU CEVAP</div>
         <div id="popupbuttons">
-            <button id="sharebutton" class="popupbutton">PAYLAŞ</button>
-            <button id="refreshbutton" class="popupbutton">YENİLE</button>
+            <button id="sharebutton" onclick="copyItemsAndLink()" class="popupbutton">PAYLAŞ</button>
+            <button id="refreshbutton" onclick="refresh()" class="popupbutton">YENİLE</button>
         </div>
     </div>
     <div id="myDiv">
